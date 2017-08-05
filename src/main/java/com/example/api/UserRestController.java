@@ -30,8 +30,12 @@ public class UserRestController {
      */
     @GetMapping
     List<TblUser> getUsers() {
-        List<TblUser> users = userService.findAll();
-        return users;
+        return userService.findAll(); 
+    }
+    
+    @GetMapping(path="{id}")
+    TblUser getUser(@PathVariable String id) {
+    	return userService.findByPk(id);
     }
     
     /**

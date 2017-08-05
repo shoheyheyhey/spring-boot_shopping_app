@@ -18,13 +18,22 @@ public class UserService {
 	TblUserMapper tblUserMapper;
 	
 	/**
-	 * ユーザ一覧取得サービス
+	 * ユーザー一覧取得サービス
 	 * @return List<TblUser>
 	 */
 	public List<TblUser> findAll() {
 		TblUserExample example = new TblUserExample();
 		example.createCriteria().andDelFlgEqualTo(String.valueOf("0"));
 		return tblUserMapper.selectByExample(example);
+	}
+	
+	/**
+	 * ユーザー取得サービス(キー：PK)
+	 * @param id
+	 * @return
+	 */
+	public TblUser findByPk(String id) {
+		return tblUserMapper.selectByPrimaryKey(id);
 	}
 	
 	/**
