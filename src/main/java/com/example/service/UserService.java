@@ -33,6 +33,8 @@ public class UserService {
 	 * @return
 	 */
 	public TblUser findByPk(String id) {
+		TblUserExample example = new TblUserExample();
+		example.createCriteria().andUserIdEqualTo(id).andDelFlgEqualTo(String.valueOf("0"));
 		return tblUserMapper.selectByPrimaryKey(id);
 	}
 	

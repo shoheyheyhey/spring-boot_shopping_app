@@ -33,6 +33,11 @@ public class UserRestController {
         return userService.findAll(); 
     }
     
+    /**
+     * ユーザ取得API(キー：PK)
+     * @param String
+     * @return
+     */
     @GetMapping(path="{id}")
     TblUser getUser(@PathVariable String id) {
     	return userService.findByPk(id);
