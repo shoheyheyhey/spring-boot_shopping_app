@@ -35,12 +35,26 @@ public class UserService {
 	public int create(TblUser user) {
 		return tblUserMapper.insertSelective(user);
 	}
+	
 	/**
-	 * ユーザー削除サービス
+	 * ユーザー削除サービス(物理削除)
 	 * @param String
 	 */
-	public void delete(String id) {
+	public void deletePhysical(String id) {
 		tblUserMapper.deleteByPrimaryKey(id);
+	}
+	
+	/**
+	 * ユーザー削除サービス(論理削除)
+	 * @param String
+	 * @return int
+	 */
+	public int deleteLogical(String id) {
+		TblUser user = new TblUser();
+		user.setUserId(id);
+		user.setDelFlg("1");
+		return tblUserMapper.updateByPrimaryKeySelective(user);
+		
 	}
 	
 	/**

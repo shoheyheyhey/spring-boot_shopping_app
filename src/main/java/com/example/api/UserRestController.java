@@ -29,7 +29,7 @@ public class UserRestController {
      * @return List<TblUser>
      */
     @GetMapping
-    List<TblUser> getItems() {
+    List<TblUser> getUsers() {
         List<TblUser> users = userService.findAll();
         return users;
     }
@@ -41,7 +41,7 @@ public class UserRestController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    int postItem(@RequestBody TblUser user) {
+    int postUser(@RequestBody TblUser user) {
     	return userService.create(user);
     }
     
@@ -51,8 +51,8 @@ public class UserRestController {
      */
     @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteItem(@PathVariable String id) {
-    	userService.delete(id);
+    void deleteUser(@PathVariable String id) {
+    	userService.deleteLogical(id);
     }
     
     /**
@@ -62,7 +62,7 @@ public class UserRestController {
      * @return item
      */
     @PutMapping(path = "{id}")
-    int putItem(@PathVariable String id, @RequestBody TblUser user) {
+    int putUser(@PathVariable String id, @RequestBody TblUser user) {
     	user.setUserId(id);
     	return userService.update(user);
     }
