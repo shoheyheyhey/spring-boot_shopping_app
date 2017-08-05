@@ -14,19 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.domain.Item;
 import com.example.entity.TblUser;
-import com.example.service.ItemService;
 import com.example.service.UserService;
 
 @RestController
-@RequestMapping("api/item")
-public class ItemRestController {
-    @Autowired
-    ItemService itemService;
+@RequestMapping("api/user")
+public class UserRestController {
+
     @Autowired
     UserService userService;
-    
     
     /**
      * ユーザー一覧取得API
@@ -39,36 +35,36 @@ public class ItemRestController {
     }
     
     /**
-     * 商品登録API
-     * @param item
-     * @return item
+     * ユーザー登録API
+     * @param TblUser
+     * @return int
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Item postItem(@RequestBody Item item) {
-    	return itemService.create(item);
+    int postItem(@RequestBody TblUser user) {
+    	return userService.create(user);
     }
     
     /**
-     * 商品削除API
-     * @param id
+     * ユーザー削除API
+     * @param String
      */
     @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteItem(@PathVariable Integer id) {
-    	itemService.delete(id);
+    void deleteItem(@PathVariable String id) {
+    	userService.delete(id);
     }
     
     /**
-     * 商品更新API
+     * ユーザー更新API
      * @param id
      * @param item
      * @return item
      */
     @PutMapping(path = "{id}")
-    Item putItem(@PathVariable Integer id, @RequestBody Item item) {
-    	item.setId(id);
-    	return itemService.update(item);
+    int putItem(@PathVariable String id, @RequestBody TblUser user) {
+    	user.setUserId(id);
+    	return userService.update(user);
     }
 
 }

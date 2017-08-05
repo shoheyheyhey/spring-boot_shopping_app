@@ -19,35 +19,36 @@ public class UserService {
 	
 	/**
 	 * ユーザ一覧取得サービス
-	 * @return List<item>
+	 * @return List<TblUser>
 	 */
 	public List<TblUser> findAll() {
 		TblUserExample example = new TblUserExample();
+		example.createCriteria().andDelFlgEqualTo(String.valueOf("0"));
 		return tblUserMapper.selectByExample(example);
 	}
 	
-//	/**
-//	 * ユーザー登録サービス
-//	 * @param item
-//	 * @return item
-//	 */
-//	public Item create(Item item) {
-//		return itemRepository.save(item);
-//	}
-//	/**
-//	 * ユーザー削除サービス
-//	 * @param id
-//	 */
-//	public void delete(Integer id) {
-//		itemRepository.delete(id);
-//	}
-//	
-//	/**
-//	 * ユーザー更新サービス
-//	 * @param item
-//	 * @return item
-//	 */
-//	public Item update(Item item) {
-//		return itemRepository.save(item);
-//	}
+	/**
+	 * ユーザー登録サービス
+	 * @param TblUser
+	 * @return int
+	 */
+	public int create(TblUser user) {
+		return tblUserMapper.insertSelective(user);
+	}
+	/**
+	 * ユーザー削除サービス
+	 * @param String
+	 */
+	public void delete(String id) {
+		tblUserMapper.deleteByPrimaryKey(id);
+	}
+	
+	/**
+	 * ユーザー更新サービス
+	 * @param TblUser
+	 * @return int
+	 */
+	public int update(TblUser user) {
+		return tblUserMapper.updateByPrimaryKeySelective(user);
+	}
 }
