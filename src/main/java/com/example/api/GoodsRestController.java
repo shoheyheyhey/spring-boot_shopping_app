@@ -14,66 +14,66 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.entity.TblUser;
-import com.example.service.UserService;
+import com.example.entity.TblGoods;
+import com.example.service.GoodsService;
 
 @RestController
-@RequestMapping("api/user")
-public class UserRestController {
+@RequestMapping("api/goods")
+public class GoodsRestController {
 
     @Autowired
-    UserService userService;
+    GoodsService goodsService;
     
     /**
-     * ユーザー一覧取得API
-     * @return List<TblUser>
+     * 商品一覧取得API
+     * @return List<TblGoods>
      */
     @GetMapping
-    List<TblUser> getUsers() {
-        return userService.findAll(); 
+    List<TblGoods> getGoodes() {
+        return goodsService.findAll(); 
     }
     
     /**
-     * ユーザ取得API(キー：PK)
+     * 商品取得API(キー：PK)
      * @param String
      * @return
      */
     @GetMapping(path="{id}")
-    TblUser getUser(@PathVariable String id) {
-    	return userService.findByPk(id);
+    TblGoods getUser(@PathVariable String id) {
+    	return goodsService.findByPk(id);
     }
     
     /**
-     * ユーザー登録API
-     * @param TblUser
+     * 商品登録API
+     * @param TblGoods
      * @return int
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    int postUser(@RequestBody TblUser user) {
-    	return userService.create(user);
+    int postUser(@RequestBody TblGoods goods) {
+    	return goodsService.create(goods);
     }
     
     /**
-     * ユーザー削除API
+     * 商品削除API
      * @param String
      */
     @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteUser(@PathVariable String id) {
-    	userService.deleteLogical(id);
+    	goodsService.deleteLogical(id);
     }
     
     /**
-     * ユーザー更新API
+     * 商品更新API
      * @param String
-     * @param TblUser
+     * @param TblGoods
      * @return int
      */
     @PutMapping(path = "{id}")
-    int putUser(@PathVariable String id, @RequestBody TblUser user) {
-    	user.setUserId(id);
-    	return userService.update(user);
+    int putUser(@PathVariable String id, @RequestBody TblGoods goods) {
+    	goods.setGoodsId(id);
+    	return goodsService.update(goods);
     }
 
 }
