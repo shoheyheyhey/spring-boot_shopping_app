@@ -15,22 +15,27 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.Item;
+import com.example.entity.TblUser;
 import com.example.service.ItemService;
+import com.example.service.UserService;
 
 @RestController
-@RequestMapping("api/items")
+@RequestMapping("api/user")
 public class ItemRestController {
     @Autowired
     ItemService itemService;
+    @Autowired
+    UserService userService;
+    
     
     /**
-     * 商品一覧取得API
-     * @return List<item>
+     * ユーザー一覧取得API
+     * @return List<TblUser>
      */
     @GetMapping
-    List<Item> getItems() {
-        List<Item> customers = itemService.findAll();
-        return customers;
+    List<TblUser> getItems() {
+        List<TblUser> users = userService.findAll();
+        return users;
     }
     
     /**
