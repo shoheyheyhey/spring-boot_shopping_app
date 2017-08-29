@@ -70,6 +70,11 @@
             <artifactId>mybatis-spring-boot-starter-test</artifactId>
             <version>1.3.0</version>
         </dependency>
+        <dependency>
+      		<groupId>com.google.apis</groupId>
+      		<artifactId>google-api-services-drive</artifactId>
+      		<version>v3-rev81-1.22.0</version>
+    	</dependency>
 	</dependencies>
 	<build>
 		<plugins>
