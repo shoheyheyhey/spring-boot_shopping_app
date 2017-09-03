@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.TblGoods;
 import com.example.entity.TblGoodsExample;
+import com.example.entity.TblGoodsExample.Criteria;
 import com.example.mapper.TblGoodsMapper;
 
 @Service
@@ -21,16 +22,27 @@ public class GoodsService {
 	 * 商品一覧取得サービス
 	 * @return List<TblGoods>
 	 */
-	public List<TblGoods> findAll() {
+	public List<TblGoods> findAll(String sortField, String sortOrder, String conditionField, String conditionValue) {
 		TblGoodsExample example = new TblGoodsExample();
-		example.createCriteria().andDelFlgEqualTo(String.valueOf("0"));
+		Criteria criteria = example.createCriteria().andDelFlgEqualTo(String.valueOf("0"));
+		// 検索条件設定
+		if(!conditionField.isEmpty() && !conditionValue.isEmpty()) {
+			// TODO:定数化
+			if(conditionField.equals("keyword")) {
+				criteria.andKeywordLike("%" + conditionValue + "%");
+			}
+		}
+		// ソート条件設定
+		if(!sortField.isEmpty() && !sortOrder.isEmpty()) {
+			example.setOrderByClause(sortField + " "+ sortOrder);
+		}
 		return tblGoodsMapper.selectByExample(example);
 	}
 	
 	/**
 	 * 商品取得サービス(キー：PK)
-	 * @param id
-	 * @return
+	 * @param String
+	 * @return TblGoods
 	 */
 	public TblGoods findByPk(String id) {
 		TblGoodsExample example = new TblGoodsExample();

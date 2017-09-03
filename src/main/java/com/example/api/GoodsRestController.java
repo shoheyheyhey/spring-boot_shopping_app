@@ -37,8 +37,11 @@ public class GoodsRestController {
      * @return List<TblGoods>
      */
     @GetMapping
-    List<TblGoods> getGoodes() {
-        return goodsService.findAll(); 
+    List<TblGoods> getGoodes(@RequestParam("sortField") String sortField
+    		,@RequestParam("sortOrder") String sortOrder
+    		,@RequestParam("conditionField") String conditionField
+    		,@RequestParam("conditionValue") String conditionValue) {
+        return goodsService.findAll(sortField, sortOrder, conditionField, conditionValue); 
     }
     
     /**
